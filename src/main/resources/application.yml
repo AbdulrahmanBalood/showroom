@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/showroom_db
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  jpa:
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+        ddl-auto: none
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: springboot-client
+            client-secret: 5zBW7IiqblNrw7bfcfeXVsHgZUZCNDLY
+            scope: openid
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8090/realms/showroom
+
+logging:
+  level:
+    liquibase: DEBUG
+
+keycloak:
+  realm: showroom
+  auth-server-url: http://localhost:8090
+  resource: springboot-client
+
