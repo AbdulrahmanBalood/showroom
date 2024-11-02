@@ -1,3 +1,5 @@
+server:
+    port: 8090
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/showroom_db
@@ -22,20 +24,25 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: springboot-client
-            client-secret: 5zBW7IiqblNrw7bfcfeXVsHgZUZCNDLY
+            client-id: frontend
+#            admin-url: http://localhost:8080
+#            realm: showroom
             scope: openid
             authorization-grant-type: authorization_code
         provider:
           keycloak:
-            issuer-uri: http://localhost:8090/realms/showroom
+            issuer-uri: http://localhost:8080/realms/showroom
 
-logging:
-  level:
-    liquibase: DEBUG
 
-keycloak:
-  realm: showroom
-  auth-server-url: http://localhost:8090
-  resource: springboot-client
+project:
+  keycloak:
+    client-id: backend
+    admin-url: http://localhost:8080
+    realm: showroom
+    client-secret: 73GOdqwfw1kG349ZZg4IbVU6mmqhDANB
+    scope: openid
+    grant-type: client_credentials
+    issuer-uri: http://localhost:8080/realms/showroom
+  allowed-origin: http://localhost:4200
+
 

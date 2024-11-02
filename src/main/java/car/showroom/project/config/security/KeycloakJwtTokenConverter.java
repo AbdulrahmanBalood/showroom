@@ -45,23 +45,7 @@ public class KeycloakJwtTokenConverter implements Converter<Jwt, JwtAuthenticati
                 .map(jwt::getClaimAsString)
                 .orElse(jwt.getClaimAsString(JwtClaimNames.SUB));
         return new JwtAuthenticationToken(jwt, authorities, principalClaimName);
-//        Stream<SimpleGrantedAuthority> accesses = Optional.of(jwt)
-//                .map(token -> token.getClaimAsMap(RESOURCE_ACCESS))
-//                .map(claimMap -> (Map<String, Object>) claimMap.get(properties.getResourceId()))
-//                .map(resourceData -> (Collection<String>) resourceData.get(ROLES))
-//                .stream()
-//                .map(role -> new SimpleGrantedAuthority(ROLE_PREFIX + role))
-//                .distinct();
-//
-//        Set<GrantedAuthority> authorities = Stream
-//                .concat(jwtGrantedAuthoritiesConverter.convert(jwt).stream(), accesses)
-//                .collect(Collectors.toSet());
-//
-//        String principalClaimName = properties.getPrincipalAttribute()
-//                .map(jwt::getClaimAsString)
-//                .orElse(jwt.getClaimAsString(JwtClaimNames.SUB));
-//
-//        return new JwtAuthenticationToken(jwt, authorities, principalClaimName);
+
     }
 
 }

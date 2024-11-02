@@ -16,6 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarDto {
+    private String uuid;
     @NotEmpty
     @Size(max = 25)
     private String vin;
@@ -31,5 +32,5 @@ public class CarDto {
     @NotEmpty
     private Double price;
     @NotEmpty
-    private Showroom showroom;
+    private ShowroomDto showroom;
 }

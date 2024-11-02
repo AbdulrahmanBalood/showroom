@@ -44,6 +44,8 @@ public abstract class AbstractBaseEntity {
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.createdBy = SessionUtils.getCurrentUser();
+        this.updatedBy = SessionUtils.getCurrentUser();
         if(this.uuid == null) {
             this.uuid = UUID.randomUUID().toString().toLowerCase();
         }

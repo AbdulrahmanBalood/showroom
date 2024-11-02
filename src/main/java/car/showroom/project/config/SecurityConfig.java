@@ -2,10 +2,12 @@ package car.showroom.project.config;
 
 import car.showroom.project.config.security.KeycloakJwtTokenConverter;
 import car.showroom.project.config.security.TokenConverterProperties;
+import car.showroom.project.properties.ProjectProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +17,9 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -27,18 +32,21 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 public class SecurityConfig {
     private final KeycloakJwtTokenConverter keycloakJwtTokenConverter;
+    private final ProjectProperties projectProperties;
     private static final String REALM_ACCESS_CLAIM = "realm_access";
     private static final String REALM_CLAIM = "roles";
     private static final String GROUPS = "groups";
 
-    public SecurityConfig (TokenConverterProperties tokenConverterProperties){
+    public SecurityConfig (TokenConverterProperties tokenConverterProperties, ProjectProperties projectProperties){
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
         this.keycloakJwtTokenConverter = new KeycloakJwtTokenConverter(jwtGrantedAuthoritiesConverter, tokenConverterProperties);
+        this.projectProperties = projectProperties;
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/public/**").permitAll() // Public endpoint
                         .anyRequest().authenticated() // All other requests require authentication
@@ -55,8 +63,19 @@ public class SecurityConfig {
         return http.build();
     }
     @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin(projectProperties.getAllowedOrigin());
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+    @Bean
     public JwtDecoder jwtDecoder() {
-        String issuerUri = "http://localhost:8090/realms/showroom"; // Use your Keycloak issuer URI
+        String issuerUri = projectProperties.getKeycloak().getIssuerUri();
         return JwtDecoders.fromIssuerLocation(issuerUri);
     }
     @Bean
