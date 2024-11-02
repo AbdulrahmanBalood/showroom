@@ -1,23 +1,18 @@
 package car.showroom.project.dto;
 
-import car.showroom.project.entitiy.Showroom;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarDto {
-    private String uuid;
+public class CarCreationDto {
     @NotEmpty
     @Size(max = 25)
     private String vin;
@@ -30,7 +25,8 @@ public class CarDto {
     @NotEmpty
     @Size(max = 25)
     private String modelYear;
-    @NotEmpty
+    @NotNull
     private Double price;
-
+    @NotEmpty
+    private String showroomCrn;
 }

@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface ShowroomRepository extends JpaRepository<Showroom,Long>, JpaSpecificationExecutor {
     Optional<Showroom> findByUuid(String uuid);
+    Optional<Showroom> findByCommercialRegistrationNumber(String crn);
 }

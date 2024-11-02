@@ -1,11 +1,13 @@
 package car.showroom.project.service;
 
 import car.showroom.project.constants.MessageConstants;
+import car.showroom.project.dto.CarCreationDto;
 import car.showroom.project.dto.CarDto;
 import car.showroom.project.dto.ShowroomDto;
 import car.showroom.project.entitiy.Car;
 import car.showroom.project.exceptions.BusinessValidationException;
 import car.showroom.project.repository.CarRepository;
+import car.showroom.project.util.SessionUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -27,16 +29,17 @@ public class CarService {
     ModelMapper modelMapper = new ModelMapper();
     public final ShowroomService showroomService;
     @Transactional
-    public CarDto createCar(CarDto carDto) {
+    public CarDto createCar(CarCreationDto carDto) {
         Car car = new Car();
         car.setModel(carDto.getModel());
+        car.setCreatedBy(SessionUtils.getCurrentUser());
         car.setMaker(carDto.getMaker());
         car.setModelYear(carDto.getModelYear());
         car.setPrice(carDto.getPrice());
         car.setVin(carDto.getVin());
-        car.setShowroom(showroomService.retrieveShowroomByUuid(carDto.getShowroom().getUuid()));
+        car.setShowroom(showroomService.retrieveShowroomByCRN(carDto.getShowroomCrn()));
         car = carRepository.save(car);
-        return carDto;
+        return modelMapper.map(car,CarDto.class);
     }
 
     public Page<CarDto> retrieveAllCars(Specification<Car> spec, Pageable pageable) {

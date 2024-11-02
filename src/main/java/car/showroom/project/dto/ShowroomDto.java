@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShowroomDto {
-    private String uuid = UUID.randomUUID().toString().toLowerCase();
+    private String uuid;
     @Size(max = 100)
     @NotEmpty
     private String name;

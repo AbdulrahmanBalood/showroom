@@ -1,5 +1,6 @@
-package car.showroom.project.controller;
+package car.showroom.project.controller.Showroom;
 
+import car.showroom.project.constants.RolesConstants;
 import car.showroom.project.dto.ShowRoomPageDto;
 import car.showroom.project.dto.ShowroomDto;
 import car.showroom.project.entitiy.Car;
@@ -26,15 +27,13 @@ import java.util.List;
 import static car.showroom.project.constants.MessageConstants.SHOWROOM_DELETED_SUCCESSFULLY;
 
 @RestController
-@RequestMapping("/private/showroom")
+@RequestMapping("/public/showroom")
 @RequiredArgsConstructor
 public class ShowroomController {
     private final ShowroomService showroomService;
-    private final MessageUtils messageUtils;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public ResponseEntity<Page<ShowRoomPageDto>> retrieveAllShowrooms(@Conjunction({
             @Or({
                     @Spec(path = "name", params = "name", spec = Like.class),
@@ -55,31 +54,11 @@ public class ShowroomController {
     }) Specification<Showroom> spec, Pageable pageable) {
         return ResponseEntity.ok(showroomService.retrieveAllShowrooms(spec, pageable));
     }
-    @GetMapping("/{uuid}")
+    @GetMapping("/{crn}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    public ResponseEntity<ShowroomDto> retrieveShowroomByUuid(@PathVariable String uuid) {
-        return ResponseEntity.ok(showroomService.retrieveShowroomDtoByUuid(uuid));
+    public ResponseEntity<ShowroomDto> retrieveShowroomByUuid(@PathVariable String crn) {
+        return ResponseEntity.ok(showroomService.retrieveShowroomDtoByUuid(crn));
 
     }
-    @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @PostMapping
-    public ResponseEntity<ShowroomDto> createShowroom(@Valid @RequestBody ShowroomDto showroomDto) {
-        return ResponseEntity.ok(showroomService.createShowroom(showroomDto));
-    }
-    @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<ShowroomDto> updateShowroom(@Valid @RequestBody ShowroomDto showroomDto) {
-        return ResponseEntity.ok(showroomService.updateShowroom(showroomDto));
-    }
-    @DeleteMapping("/{uuid}")
-    @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<String> deleteShowroom(@PathVariable String uuid) {
-        showroomService.deleteShowroom(uuid);
-        return ResponseEntity.ok(messageUtils.getMessage(SHOWROOM_DELETED_SUCCESSFULLY));
 
-    }
 }

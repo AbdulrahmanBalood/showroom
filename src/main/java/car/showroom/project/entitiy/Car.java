@@ -1,8 +1,10 @@
 package car.showroom.project.entitiy;
 
 import car.showroom.project.util.AbstractBaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,9 +43,9 @@ public class Car extends AbstractBaseEntity {
     @Size(max = 25)
     @Column(name = "model_year")
     private String modelYear;
-    @NotEmpty
+    @NotNull
     private Double price;
-    @NotEmpty
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "showroom_id")
     private Showroom showroom;

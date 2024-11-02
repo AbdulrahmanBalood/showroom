@@ -12,11 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShowRoomPageDto {
-
-
     private String name;
     private String commercialRegistrationNumber;
-
     private Integer phoneNumber;
-
 }

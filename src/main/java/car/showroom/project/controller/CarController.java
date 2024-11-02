@@ -1,9 +1,11 @@
 package car.showroom.project.controller;
 
 import car.showroom.project.constants.RolesConstants;
+import car.showroom.project.dto.CarCreationDto;
 import car.showroom.project.dto.CarDto;
 import car.showroom.project.entitiy.Car;
 import car.showroom.project.service.CarService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
@@ -18,12 +20,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/private/car")
 @RequiredArgsConstructor
-public class CarPrivateController {
+public class CarController {
     private final CarService carService;
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
@@ -60,8 +60,8 @@ public class CarPrivateController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @PreAuthorize("hasAnyRole('"+ RolesConstants.ROLE_ADMIN+"', '"+ RolesConstants.ROLE_USER+"')")
-    public ResponseEntity<CarDto> createCar(CarDto carDto) {
-        return new ResponseEntity<>(carService.createCar(carDto), HttpStatus.CREATED);
+    public ResponseEntity<CarDto> createCar(@Valid @RequestBody CarCreationDto carCreationDto) {
+        return new ResponseEntity<>(carService.createCar(carCreationDto), HttpStatus.CREATED);
     }
 
 
