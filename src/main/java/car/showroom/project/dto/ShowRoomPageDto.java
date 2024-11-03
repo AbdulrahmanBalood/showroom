@@ -14,5 +14,5 @@ import java.util.UUID;
 public class ShowRoomPageDto {
     private String name;
     private String commercialRegistrationNumber;
-    private Integer phoneNumber;
+    private String phoneNumber;
 }

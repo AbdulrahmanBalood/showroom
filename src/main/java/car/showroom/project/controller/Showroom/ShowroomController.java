@@ -1,13 +1,9 @@
 package car.showroom.project.controller.Showroom;
 
-import car.showroom.project.constants.RolesConstants;
 import car.showroom.project.dto.ShowRoomPageDto;
 import car.showroom.project.dto.ShowroomDto;
-import car.showroom.project.entitiy.Car;
-import car.showroom.project.entitiy.Showroom;
+import car.showroom.project.entitiy.ShowroomEntity;
 import car.showroom.project.service.ShowroomService;
-import car.showroom.project.util.MessageUtils;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
@@ -19,12 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-import static car.showroom.project.constants.MessageConstants.SHOWROOM_DELETED_SUCCESSFULLY;
 
 @RestController
 @RequestMapping("/public/showroom")
@@ -51,7 +42,7 @@ public class ShowroomController {
                     @Spec(path = "address", params = "address", spec = Like.class),
 
             }),
-    }) Specification<Showroom> spec, Pageable pageable) {
+    }) Specification<ShowroomEntity> spec, Pageable pageable) {
         return ResponseEntity.ok(showroomService.retrieveAllShowrooms(spec, pageable));
     }
     @GetMapping("/{crn}")

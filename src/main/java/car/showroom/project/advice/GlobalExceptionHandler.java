@@ -5,9 +5,12 @@ import car.showroom.project.exceptions.NotFoundException;
 import car.showroom.project.util.ErrorCode;
 import car.showroom.project.util.ErrorResponse;
 import car.showroom.project.util.MessageUtils;
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +30,26 @@ public class GlobalExceptionHandler {
     public ErrorResponse handleBusinessValidationException(BusinessValidationException ex) {
         log.error("BusinessValidationException: {}", ex.getMessage());
         return new ErrorResponse(ErrorCode.BUSINESS_VALIDATION_ERROR, messageUtils.getMessage(ex.getMessage()));
+    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        log.error("MethodArgumentNotValidException: {}", ex.getMessage());
+
+        String errorMessage = ex.getBindingResult().getFieldErrors().stream()
+                .findFirst()
+                .map(FieldError::getDefaultMessage)
+                .orElse("Validation error");
+
+        return new ErrorResponse(ErrorCode.BUSINESS_VALIDATION_ERROR, errorMessage);
+    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleBusinessValidationException(ConstraintViolationException ex) {
+        log.error("ConstraintViolationException: {}", ex.getMessage());
+        return new ErrorResponse(ErrorCode.BUSINESS_VALIDATION_ERROR, ex.getMessage());
     }
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

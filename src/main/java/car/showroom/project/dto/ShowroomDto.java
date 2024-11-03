@@ -1,13 +1,12 @@
 package car.showroom.project.dto;
 
-import car.showroom.project.entitiy.Car;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Setter
 @Getter
@@ -19,12 +18,13 @@ public class ShowroomDto {
     @NotEmpty
     private String name;
     @NotEmpty
+    @Pattern(regexp = "\\d{1,15}", message = "Commercial Registration Number must be numeric and up to 15 digits")
     private String commercialRegistrationNumber;
-    @Size(max = 100)
+    @Size(max = 100, message = "Manager name cannot exceed 100 characters")
     private String managerName;
-    @Max(value = 999999999999999L, message = "Phone number cannot exceed 15 digits")
-    @NonNull
-    private Integer phoneNumber;
+    @NotEmpty
+    @Pattern(regexp = "\\d{1,15}", message = "Phone number must be numeric and up to 15 digits")
+    private String phoneNumber;
     @Size(max = 255)
     private String address;
     private List<CarDto> cars;

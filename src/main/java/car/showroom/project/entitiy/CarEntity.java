@@ -3,20 +3,13 @@ package car.showroom.project.entitiy;
 import car.showroom.project.util.AbstractBaseEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.hibernate.envers.AuditOverride;
-import org.hibernate.envers.AuditTable;
-import org.hibernate.envers.Audited;
-
-import java.util.UUID;
 
 @Setter
 @Getter
@@ -26,27 +19,33 @@ import java.util.UUID;
 @SQLDelete(sql = "UPDATE car SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
 @Table(name = "car")
-public class Car extends AbstractBaseEntity {
+public class CarEntity extends AbstractBaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
-    @Size(max = 25)
+
+    @NotEmpty(message = "VIN is required")
+    @Size(max = 25, message = "VIN cannot exceed 25 characters")
     private String vin;
-    @NotEmpty
-    @Size(max = 25)
+
+    @NotEmpty(message = "Maker is required")
+    @Size(max = 25, message = "Maker cannot exceed 25 characters")
     private String maker;
-    @NotEmpty
-    @Size(max = 25)
+
+    @NotEmpty(message = "Model is required")
+    @Size(max = 25, message = "Model cannot exceed 25 characters")
     private String model;
-    @NotEmpty
-    @Size(max = 25)
-    @Column(name = "model_year")
+
+    @NotEmpty(message = "Model year is required")
+    @Pattern(regexp = "\\d{4}", message = "Model year must be a 4-digit number")
+    @Column(name = "model_year", length = 4)
     private String modelYear;
-    @NotNull
+
+    @NotNull(message = "Price is required")
     private Double price;
+
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "showroom_id")
-    private Showroom showroom;
+    private ShowroomEntity showroomEntity;
 }

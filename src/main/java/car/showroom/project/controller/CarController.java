@@ -3,7 +3,7 @@ package car.showroom.project.controller;
 import car.showroom.project.constants.RolesConstants;
 import car.showroom.project.dto.CarCreationDto;
 import car.showroom.project.dto.CarDto;
-import car.showroom.project.entitiy.Car;
+import car.showroom.project.entitiy.CarEntity;
 import car.showroom.project.service.CarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +53,7 @@ public class CarController {
                     @Spec(path = "showroom.name", params = "showroom", spec = Equal.class)
 
             })
-    })Specification<Car> spec, Pageable pageable) {
+    })Specification<CarEntity> spec, Pageable pageable) {
         return carService.retrieveAllCars(spec,pageable);
     }
 
