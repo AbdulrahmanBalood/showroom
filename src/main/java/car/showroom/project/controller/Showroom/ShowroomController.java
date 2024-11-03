@@ -1,12 +1,12 @@
 package car.showroom.project.controller.Showroom;
 
-import car.showroom.project.dto.ShowRoomPageDto;
-import car.showroom.project.dto.ShowroomDto;
+import car.showroom.project.dto.Showroom.ShowRoomPageDto;
+import car.showroom.project.dto.Showroom.ShowroomDto;
 import car.showroom.project.entitiy.ShowroomEntity;
 import car.showroom.project.service.ShowroomService;
 import lombok.RequiredArgsConstructor;
-import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
+import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Conjunction;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
@@ -27,19 +27,10 @@ public class ShowroomController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Page<ShowRoomPageDto>> retrieveAllShowrooms(@Conjunction({
             @Or({
-                    @Spec(path = "name", params = "name", spec = Like.class),
-
-            }),
-            @Or({
-                    @Spec(path = "commercialRegistrationNumber", params = "crn", spec = Equal.class),
-
-            }),
-            @Or({
-                    @Spec(path = "phoneNumber", params = "phoneNumber", spec = Equal.class),
-
-            }),
-            @Or({
-                    @Spec(path = "address", params = "address", spec = Like.class),
+                    @Spec(path = "name", params = "search", spec = LikeIgnoreCase.class),
+                    @Spec(path = "address", params = "search", spec = LikeIgnoreCase.class),
+                    @Spec(path = "commercialRegistrationNumber", params = "search", spec = Like.class),
+                    @Spec(path = "phoneNumber", params = "search", spec = Like.class),
 
             }),
     }) Specification<ShowroomEntity> spec, Pageable pageable) {

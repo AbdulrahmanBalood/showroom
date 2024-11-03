@@ -1,6 +1,6 @@
-package car.showroom.project.dto;
+package car.showroom.project.dto.Showroom;
 
-import jakarta.validation.constraints.Max;
+import car.showroom.project.dto.Car.CarDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

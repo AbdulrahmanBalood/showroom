@@ -1,7 +1,8 @@
 package car.showroom.project.service;
 
-import car.showroom.project.dto.ShowRoomPageDto;
-import car.showroom.project.dto.ShowroomDto;
+import car.showroom.project.dto.Car.CarDto;
+import car.showroom.project.dto.Showroom.ShowRoomPageDto;
+import car.showroom.project.dto.Showroom.ShowroomDto;
 import car.showroom.project.entitiy.ShowroomEntity;
 import car.showroom.project.repository.ShowroomRepository;
 import car.showroom.project.util.MessageUtils;
@@ -12,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static car.showroom.project.constants.MessageConstants.SHOWROOM_NOT_FOUND;
 
@@ -28,7 +32,14 @@ public class ShowroomService {
     }
     public ShowroomDto retrieveShowroomDtoByUuid(String crn) {
         ShowroomEntity showroomEntity = retrieveShowroomByCRN(crn);
-        return modelMapper.map(showroomEntity, ShowroomDto.class);
+        ShowroomDto showroomDto = modelMapper.map(showroomEntity, ShowroomDto.class);
+        if (showroomEntity.getCarEntities() != null && !showroomEntity.getCarEntities().isEmpty()) {
+            List<CarDto> carDtos = showroomEntity.getCarEntities().stream()
+                    .map(car -> modelMapper.map(car, CarDto.class))
+                    .collect(Collectors.toList());
+            showroomDto.setCars(carDtos);
+        }
+        return showroomDto;
     }
     public ShowroomEntity retrieveShowroomByUuid(String uuid){
         return showroomRepository.findByUuid(uuid).orElseThrow(() -> new RuntimeException(SHOWROOM_NOT_FOUND));

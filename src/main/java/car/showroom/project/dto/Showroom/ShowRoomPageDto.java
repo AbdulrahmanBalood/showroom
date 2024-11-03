@@ -1,4 +1,4 @@
-package car.showroom.project.dto;
+package car.showroom.project.dto.Showroom;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;

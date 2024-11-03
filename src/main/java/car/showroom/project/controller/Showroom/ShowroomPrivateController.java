@@ -1,7 +1,7 @@
 package car.showroom.project.controller.Showroom;
 
 import car.showroom.project.constants.RolesConstants;
-import car.showroom.project.dto.ShowroomDto;
+import car.showroom.project.dto.Showroom.ShowroomDto;
 import car.showroom.project.service.ShowroomService;
 import car.showroom.project.util.MessageUtils;
 import jakarta.validation.Valid;

@@ -1,7 +1,8 @@
 package car.showroom.project.service;
 
-import car.showroom.project.dto.CarCreationDto;
-import car.showroom.project.dto.CarDto;
+import car.showroom.project.dto.Car.CarCreationDto;
+import car.showroom.project.dto.Car.CarDto;
+import car.showroom.project.dto.Car.CarPageDto;
 import car.showroom.project.entitiy.CarEntity;
 import car.showroom.project.repository.CarRepository;
 import car.showroom.project.util.SessionUtils;
@@ -33,8 +34,13 @@ public class CarService {
         return modelMapper.map(carEntity,CarDto.class);
     }
 
-    public Page<CarDto> retrieveAllCars(Specification<CarEntity> spec, Pageable pageable) {
-        Page<CarEntity> cars = carRepository.findAll(spec,pageable);
-        return cars.map(car -> modelMapper.map(car, CarDto.class));
+    public Page<CarPageDto> retrieveAllCars(Specification<CarEntity> spec, Pageable pageable) {
+        Page<CarEntity> cars = carRepository.findAll(spec, pageable);
+        return cars.map(car -> {
+            CarPageDto carPageDto = modelMapper.map(car, CarPageDto.class);
+            carPageDto.setShowroomName(car.getShowroomEntity().getName());
+            carPageDto.setShowroomPhoneNumber(car.getShowroomEntity().getPhoneNumber());
+            return carPageDto;
+        });
     }
 }
