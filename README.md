@@ -51,11 +51,19 @@ project:
     realm: showroom
     client-secret: <backend_client_secret>
 ```
-### Postmman testing
 
-If you are going to use postmant to test the API's, please make sure to update the `clientSecret` value by following these steps:
+### API Testing with Postman
+
+A Postman collection with example requests for this project can be found in the [`postman/`](postman/cars.postman_collection.json) folder. To use it:
+
+1. Download the file.
+2. Open Postman and use the **Import** option to add the collection.
+
+please make sure to update the `clientSecret` value by following these steps:
 Click on the Collection ('cars') -> Scripts -> Pre-request
 You will find the `clientSecret`, you can update it and use the `username` and `password` of the users you created   
+
+
 ### Stop Keycloak:
 ```bash
 docker-compose down
