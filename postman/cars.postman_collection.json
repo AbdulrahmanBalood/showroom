@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "28b399ba-69c5-429c-a665-fd5a7225585e",
+		"name": "cars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17640275"
+	},
+	"item": [
+		{
+			"name": "Create showroom",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"BMW\",\r\n    \"commercialRegistrationNumber\":\"56733339\",\r\n    \"managerName\":\"G\",\r\n    \"address\":\"RRDD8416\",\r\n    \"phoneNumber\":\"0545882319\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/private/showroom",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"private",
+						"showroom"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create showroom",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"BMW\",\r\n    \"commercialRegistrationNumber\":\"56733339\",\r\n    \"managerName\":\"G\",\r\n    \"address\":\"RRDD8416\",\r\n    \"phoneNumber\":\"0545882319\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/private/showroom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"private",
+								"showroom"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Create Car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vin\":\"7687687\",\r\n    \"maker\":\"Toyota\",\r\n    \"model\":\"Camre\",\r\n    \"modelYear\":\"2014\",\r\n    \"price\": 2500.0,\r\n    \"showroomCrn\":\"56733339\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/private/car",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"private",
+						"car"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Car",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vin\":\"7687687\",\r\n    \"maker\":\"Toyota\",\r\n    \"model\":\"Camre\",\r\n    \"modelYear\":\"2014\",\r\n    \"price\": 2500.0,\r\n    \"showroomCrn\":\"56733339\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/private/car",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"private",
+								"car"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update Showroom",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"BMW\",\r\n    \"commercialRegistrationNumber\":\"56733339\",\r\n    \"managerName\":\"Ahmed\",\r\n    \"address\":\"RRRD2389\",\r\n    \"phoneNumber\":\"0545882319\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/private/showroom",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"private",
+						"showroom"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Showroom",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"BMW\",\r\n    \"commercialRegistrationNumber\":\"56733339\",\r\n    \"managerName\":\"Ahmed\",\r\n    \"address\":\"RRRD2389\",\r\n    \"phoneNumber\":\"0545882319\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/private/showroom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"private",
+								"showroom"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete Showroom",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/private/showroom/56733339",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"private",
+						"showroom",
+						"56733339"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete Showroom",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/private/showroom/56733339",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"private",
+								"showroom",
+								"56733339"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get showrooms page",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/public/showroom?page=0&size=5&sort=updatedAt,desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"public",
+						"showroom"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "sort",
+							"value": "updatedAt,desc"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get showrooms page",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/public/showroom?page=0&size=5&sort=updatedAt,desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"public",
+								"showroom"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "updatedAt,desc"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get cars page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/public/car?page=0&size=5&sort=updatedAt,desc&search=KIA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"public",
+						"car"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "sort",
+							"value": "updatedAt,desc"
+						},
+						{
+							"key": "search",
+							"value": "KIA"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get cars page",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/public/car?page=0&size=5&sort=updatedAt,desc&search=KIA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"public",
+								"car"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "updatedAt,desc"
+								},
+								{
+									"key": "search",
+									"value": "KIA"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": "",
+					"header": "",
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Get showrooms by commercialRegistrationNumber",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/public/showroom/2342343333",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"public",
+						"showroom",
+						"2342343333"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get showrooms page by commercialRegistrationNumber",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/public/showroom/2342343333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"public",
+								"showroom",
+								"2342343333"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// Keycloak configuration\r",
+					"var server = \"http://localhost:8080\";\r",
+					"var realm = \"showroom\";\r",
+					"var grantType = \"password\";\r",
+					"var clientId = \"backend\";\r",
+					"var clientSecret = \"73GOdqwfw1kG349ZZg4IbVU6mmqhDANB\"; // Include client secret\r",
+					"var username = \"test_admin_user\";\r",
+					"var password = \"password\";\r",
+					"\r",
+					"// Unset previous token to get a fresh one\r",
+					"pm.environment.unset(\"token\");\r",
+					"\r",
+					"// Construct the token URL and request payload\r",
+					"var url = `${server}/realms/${realm}/protocol/openid-connect/token`;\r",
+					"var data = [\r",
+					"    { key: \"grant_type\", value: grantType },\r",
+					"    { key: \"client_id\", value: clientId },\r",
+					"    { key: \"username\", value: username },\r",
+					"    { key: \"password\", value: password }\r",
+					"];\r",
+					"\r",
+					"// Include client secret if it's a confidential client\r",
+					"if (clientSecret) {\r",
+					"    data.push({ key: \"client_secret\", value: clientSecret });\r",
+					"}\r",
+					"\r",
+					"// Send the request to get the token\r",
+					"pm.sendRequest({\r",
+					"    url: url,\r",
+					"    method: 'POST',\r",
+					"    header: {\r",
+					"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+					"    },\r",
+					"    body: {\r",
+					"        mode: 'urlencoded',\r",
+					"        urlencoded: data\r",
+					"    }\r",
+					"}, function (err, response) {\r",
+					"    console.log(\"response\",response)\r",
+					"    if (err || response.code !== 200) {\r",
+					"        console.log('Error obtaining token:', err || response.status);\r",
+					"    } else {\r",
+					"        var responseJson = response.json();\r",
+					"        if (responseJson.access_token) {\r",
+					"            // Save the token to the environment variable\r",
+					"            pm.environment.set('token', responseJson.access_token);\r",
+					"            console.log(\"Token obtained and saved:\", responseJson.access_token);\r",
+					"        } else {\r",
+					"            console.log(\"No access token found in response.\");\r",
+					"        }\r",
+					"    }\r",
+					"});\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
