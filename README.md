@@ -56,4 +56,5 @@ project:
 docker-compose down
 ```
 ### Notes
-The realm-export.json file preconfigures Keycloak with two clients (backend and frontend) and relevant roles.
+1. The realm-export.json file preconfigures Keycloak with two clients (backend and frontend) and relevant roles.
+2. Please make sure to sign up to be able to craete showrooms and cars, you can sign up from the frontend or from Postman request
