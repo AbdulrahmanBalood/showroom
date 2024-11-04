@@ -395,10 +395,10 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": "",
-					"header": "",
+					"_postman_previewlanguage": null,
+					"header": null,
 					"cookie": [],
-					"body": ""
+					"body": null
 				}
 			]
 		},
@@ -459,6 +459,66 @@
 					"body": null
 				}
 			]
+		},
+		{
+			"name": "Create admin user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"test-admin\",\r\n    \"password\":\"admin\",\r\n    \"firstName\":\"admin\",\r\n    \"lastName\":\"test\",\r\n    \"email\":\"test@admin.com\",\r\n    \"phoneNumber\":\"966555098234\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/public/auth/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"public",
+						"auth",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user with role user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"test-user\",\r\n    \"password\":\"user\",\r\n    \"firstName\":\"user\",\r\n    \"lastName\":\"test\",\r\n    \"email\":\"test@user.com\",\r\n    \"phoneNumber\":\"966555098231\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/public/auth/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"public",
+						"auth",
+						"user"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -519,6 +579,7 @@
 					"    console.log(\"response\",response)\r",
 					"    if (err || response.code !== 200) {\r",
 					"        console.log('Error obtaining token:', err || response.status);\r",
+					"        console.log('Error:', err );\r",
 					"    } else {\r",
 					"        var responseJson = response.json();\r",
 					"        if (responseJson.access_token) {\r",
